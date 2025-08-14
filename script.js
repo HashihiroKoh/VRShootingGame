@@ -73,7 +73,7 @@ var bulletMove = function () {
   for (let i = 0; i < bc; i++) {
     let bullet = document.getElementById("bullet" + i);
 
-    if (bullet.getAttribute("visible")) {
+    if (bullet) {
       nowTime[i] = new Date().getTime();
       let time = nowTime[i] - startTime[i];
       if (time >= 2000) {
