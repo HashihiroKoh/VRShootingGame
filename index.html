@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>shooting game for web AR</title>
+    
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.0.0/dist/aframe-environment-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="/script.js"></script>
+
+    <script>
+      AFRAME.registerComponent("onshoot", {
+        init: function () {
+          this.el.addEventListener("mousedown", mouseDown);
+          this.el.addEventListener("mouseup", mouseUp);
+        },
+      });
+
+      AFRAME.registerComponent("onstart", {
+        init: function () {
+          this.el.addEventListener("click", function (e) {
+            const camera = document.getElementById("camera");
+            let start = document.getElementById("startBtn");
+            camera.removeChild(start);
+            gameFlag = true;
+            sceneCreat();
+          });
+        },
+      });
+      AFRAME.registerComponent("onretry", {
+        init: function () {
+          this.el.addEventListener("click", function (e) {
+            location.reload();
+          });
+        },
+      });
+    </script>
+  </head>
+
+  <body>
+    <a-scene>
+      <a-sky
+        src="https://cdn.glitch.global/95f1d303-7f12-4a05-9cdf-ccadca6e370f/uu.webp?v=1714900609129"
+      >
+      </a-sky>
+      <a-asset-item
+        id="red"
+        src="https://cdn.glitch.global/95f1d303-7f12-4a05-9cdf-ccadca6e370f/RedMonster.glb?v=1714030125701"
+      ></a-asset-item>
+      <a-asset-item
+        id="blue"
+        src="https://cdn.glitch.global/95f1d303-7f12-4a05-9cdf-ccadca6e370f/BlueMonster.glb?v=1714091602838"
+      ></a-asset-item>
+
+      <a-camera
+        id="camera"
+        rotation="0 0 0"
+        position="0 0 0"
+        wasd-controls="enabled: false"
+      >
+        <a-cursor
+          cursor="rayOrigin: mouse"
+          position="0 0 -1.1"
+          geometry="primitive: ring; radiusInner: 0.045; radiusOuter: 0.06"
+          material="color: tomato; shader: flat"
+        ></a-cursor>
+        <a-circle
+          id="shoot"
+          onshoot
+          radius="0.2"
+                  material="color: red"
+          position="0 -1.4 -2"
+                  class="collidable"
+        >
+          <a-text
+            width="2.5"
+            position="-0.15 0 0"
+            value="Shoot"
+            color="black"
+          ></a-text>
+        </a-circle>
+
+        <a-plane
+          id="startBtn"
+          onstart
+          position="0 0 -1"
+                 width="0.35"
+                 height="0.15"
+          color="yellow"
+          class="clickable"
+        >
+          <a-text
+            width="1.5"
+            position="-0.1 0 0"
+            value="START"
+            color="black"
+          ></a-text>
+        </a-plane>
+
+        <a-entity>
+          <a-text
+            id="countText"
+            position="-0.3 0.7 -1"
+            width="2"
+            color="yellow"
+            value="0 / 20"
+          ></a-text>
+          <a-text
+            id="timerText"
+            position="0.2 0.7 -1"
+            width="2"
+            color="cyan"
+            value="60"
+          ></a-text>
+        </a-entity>
+      </a-camera>
+    </a-scene>
+  </body>
+</html>
