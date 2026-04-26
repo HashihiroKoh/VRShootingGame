@@ -30,7 +30,7 @@ var shot = function () {
   let num = getBullet();
   startTime[num] = new Date().getTime();
   const ban = new Audio(
-    "https://cdn.glitch.global/95f1d303-7f12-4a05-9cdf-ccadca6e370f/shot.mp3?v=1713753072464"
+    "../ARShootingGame/assets/shot.mp3"
   );
   ban.play();
 };
@@ -132,7 +132,7 @@ function colliderCheck(bullet) {
         effect(monsterPos);
         setTimeout(ce, 1500);
         const don = new Audio(
-          "https://cdn.glitch.global/95f1d303-7f12-4a05-9cdf-ccadca6e370f/hit.mp3?v=1714116939953"
+          "../ARShootingGame/assets/hit.mp3"
         );
         don.play();
         hitCount++;
@@ -156,7 +156,7 @@ function showClock() {
   }
   time--;
   const beep = new Audio(
-    "https://cdn.glitch.global/95f1d303-7f12-4a05-9cdf-ccadca6e370f/warning.mp3?v=1714190612758"
+    "../ARShootingGame/assets/warning.mp3"
   );
   const timerText = document.getElementById("timerText");
   if (time > 21) {
